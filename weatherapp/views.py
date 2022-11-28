@@ -9,24 +9,28 @@ def index(request):
 
 
 def weather(request):
+  
+    if request.method=='POST':
+        city= request.POST['city']
+        # print(city)
+        # city='delhi'
+        url=f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=a9d4ed24815c118355a761ce5402a9b1'
+        jdata=requests.get(url).json()
+        print(jdata)
+        data={
+            'city':jdata['name'],
+            'weather':jdata['weather'][0]['main'],
+            'keltempeature':jdata['main']['temp'],
+            'ctempeature':str(int(jdata['main']['temp']-273))+ '°C',
+            'pressure':jdata['main']['pressure']
 
-    city= request.GET.get('city')
-    # print(city)
-    # city='delhi'
-    url=f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=a9d4ed24815c118355a761ce5402a9b1'
-    data=requests.get(url).json()
-    payload={
-        'city':data['name'],
-        'weather':data['weather'][0]['main'],
-        'keltempeature':data['main']['temp'],
-        'ctempeature':int(data['main']['temp']-273),
-        'pressure':data['main']['pressure']
-
-    }
-    context={'data':payload}
-    print(context)
-
-    return render(request,'weather.html',context)
+        }
+        
+        return render(request,'weather.html',data)
+    else:
+        data={}
+        return render(request,'weather.html',data)
+        
 
 def about(request):
     return render(request,'about.html')

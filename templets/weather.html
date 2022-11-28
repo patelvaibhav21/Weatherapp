@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +53,7 @@
                                 <a class="nav-link" href="weather">Weather</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about">About</a>
+                                <a class="nav-link" href="about">About Us</a>
                             </li>
 
                         </ul>
@@ -71,7 +72,7 @@
 
                 <div class="container-fluid  main_content">
 
-                    <form class="temp_form " method="get">
+                    <form class="temp_form " method="POST">
                             {% csrf_token %}
                         <input type="text" id="cityName" name="city" placeholder="Enter you city name.."
                             autocomplete="off">
@@ -82,11 +83,11 @@
 
                     <div class="tempInformation  ">
                         <div class="top_layer">
-                           <h4><p id="day"></p></h4> 
+                           
                             <p id="today_date"> </p>
                         </div>
                         <div class="main_layer ">
-                            <p id="city_name"> {{data.city}} <br>Temprature:{{data.ctempeature}}°C <br>Pressure: {{data.pressure}}</p>
+                            <p id="city_name"> City: {{city}} <br>Temprature:{{ctempeature}} <br>Pressure: {{pressure}}</p>
                             <div class="middle_layer data_hide">
                                 <p id="temp">hii</p>
                                 <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
@@ -102,12 +103,15 @@
     </div>
 
     <!-- footer -->
-
+    <h4><p id="day"></p></h4> 
+    
+   
     <footer>
         <p>
-            created with ❤
+            main page 
         </p>
     </footer>
+    
 
     <script src="">
         var date= new Date()
